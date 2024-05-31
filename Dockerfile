@@ -9,7 +9,7 @@ RUN curl -SsLf "https://downloads.bitnami.com/files/stacksmith/python-3.12.3-8-l
     mkdir /python3.12; \
     tar -zxf "python-3.12.3-8-linux-amd64-debian-12.tar.gz" -C /python3.12 --strip-components=2 --no-same-owner --wildcards '*/files' ;
 
-FROM bitnami/airflow:2.9.1-debian-12-r5
+FROM bitnami/airflow:2.9.1-debian-12-r4
 
 USER root
 

@@ -1,7 +1,7 @@
 FROM alpine as cuesetup
 RUN wget https://github.com/cue-lang/cue/releases/download/v0.7.1/cue_v0.7.1_linux_amd64.tar.gz && tar -zxf cue_v0.7.1_linux_amd64.tar.gz
 
-FROM bitnami/airflow-scheduler:2.9.1-debian-12-r5 as py312
+FROM bitnami/airflow:2.9.1-debian-12-r5 as py312
 
 USER root
 RUN apt-get update && apt-get install curl -y
@@ -30,5 +30,6 @@ RUN curl https://packages.microsoft.com/config/debian/12/prod.list | tee /etc/ap
 RUN apt-get update; ACCEPT_EULA=Y apt-get install -y msodbcsql18; 
 
 USER 1001
-# RUN . /opt/bitnami/airflow/venv/bin/activate && pip install -r requirements.txt; deactivate
-
+RUN . /opt/bitnami/airflow/venv/bin/activate && pip install -r requirements.txt; deactivate
+ENTRYPOINT [ "/opt/bitnami/scripts/airflow/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/airflow/run.sh" ]
